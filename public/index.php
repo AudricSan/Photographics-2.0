@@ -24,7 +24,7 @@ function foot()
 function gallery($how)
 {
   $_GET['id'] = $how;
-  // include_once('../view/gallery.html');
+  include_once('../view/index.html');
 }
 
 function adnav()
