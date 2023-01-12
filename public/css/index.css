@@ -1,4 +1,76 @@
 a {
   color: black;
   text-decoration: none;
+}
+
+main {
+  margin-top: 5em;
+  padding: 1em;
+}
+main .card {
+  padding: 0.5em;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2), 0px 0px 1px rgba(9, 30, 66, 0.31);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 200px;
+  min-height: 75px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 2em 0 0.5em 3em;
+  z-index: 998;
+  position: absolute;
+}
+main .card h2,
+main .card h3 {
+  margin: 0;
+  padding: 0 0 0 0.5em;
+  text-align: left;
+}
+main .card h3 {
+  padding: 0 0 0 0.7em;
+}
+main .gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+main .gallery .media {
+  margin: 1em;
+}
+main .gallery .media div {
+  position: relative;
+}
+main .gallery .media div a:first-of-type {
+  position: absolute;
+  left: 1em;
+  bottom: 1em;
+}
+main .gallery .media div a:last-of-type {
+  position: absolute;
+  right: 1.2em;
+  bottom: 1em;
+}
+main .gallery .media div a i {
+  font-size: 20px;
+  color: blue;
+}
+main .gallery .media div a i:hover {
+  color: lightblue;
+}
+main .gallery .media img {
+  border: 5px solid lightblue;
+  border-radius: 15px;
+  padding: 5px;
+  max-height: 150px;
+}
+main .gallery .media img:hover {
+  border-color: lightcoral;
 }/*# sourceMappingURL=index.css.map */
