@@ -13,18 +13,18 @@ define('BASEPATH', '/');
 // NOTE This function just renders a simple header
 function head()
 {
-  include_once('include/header.php');
+  include_once('include/header.html');
 }
 
 function foot()
 {
-  include_once('include/footer.php');
+  include_once('include/footer.html');
 }
 
 function gallery($how)
 {
   $_GET['id'] = $how;
-  include_once('../view/gallery.php');
+  // include_once('../view/gallery.html');
 }
 
 function adnav()
