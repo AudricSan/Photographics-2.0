@@ -1,6 +1,7 @@
 <?php
 
 namespace photographics;
+
 class Route
 {
 
