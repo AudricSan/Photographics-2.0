@@ -1,16 +1,16 @@
 <?php
 
-// NOTE Use this namespace
+// Use this namespace
 use photographics\Route;
 
-// NOTE Include class
+// Include class
 include '../model/class/Route.php';
 include '../model/class/env.php';
 
-// NOTE Define a global basepath
+// Define a global basepath
 define('BASEPATH', '/');
 
-// NOTE This function just renders a simple header
+// This function is used to make the elements of the main page
 function head()
 {
   include_once('include/header.html');
@@ -38,7 +38,29 @@ Route::add('/', function () {
   gallery(false);
   foot();
 });
+Route::add('/([0-9]*)', function ($id) {
+  head();
+  gallery($id);
+  foot();
+});
 
+Route::add('/about', function () {
+  head();
+  include_once('../view/about.html');
+  foot();
+});
+
+Route::add('/privacy', function () {
+  head();
+  include_once('../view/privacy.html');
+  foot();
+});
+
+Route::add('/contact', function () {
+  head();
+  include_once('../view/contact.html');
+  foot();
+});
 
 
 
