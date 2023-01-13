@@ -1,0 +1,31 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.error form {
+  margin-top: 1em;
+}
+.error form button {
+  padding: 0.5em 1em 0.5em 1em;
+  border: solid 1px black;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2), 0px 0px 1px rgba(9, 30, 66, 0.31);
+}
+.error form button:hover {
+  box-shadow: none;
+}
+.error div {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+}
+.error div p,
+.error div span {
+  margin-right: 0.2em;
+}
+.error div span {
+  color: blue;
+  font-weight: bold;
+}/*# sourceMappingURL=error.css.map */
