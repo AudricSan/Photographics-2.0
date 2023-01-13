@@ -115,16 +115,17 @@ Route::add('/', function () {
 // ANCHOR 404 not found route
 Route::pathNotFound(function ($path) {
   head();
-  include('../view/error/404.php');
-  echo 'The requested path "' . $path . '" was not found!';
+  include('../view/error/404.html');
+  echo '<p>The requested path </p><span>"' . $path . '"</span><p> was not found!</p></div></main>';
+
   foot();
 });
 
 // ANCHOR 405 method not allowed route
 Route::methodNotAllowed(function ($path, $method) {
   head();
-  include('../view/error/405.php');
-  echo 'The requested path "' . $path . '" exists. But the request method "' . $method . '" is not allowed on this path!';
+  include('../view/error/405.html');
+  echo '<p>The requested path "' . $path . '" exists. But the request method "</p><span>' . $method . '"</span><p> is not allowed on this path!</p></div></main>';
   foot();
 });
 //!SECTION
