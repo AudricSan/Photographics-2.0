@@ -63,6 +63,14 @@ main .gallery .media img {
 main .gallery .media img:hover {
   border-color: lightcoral;
 }
+main .gallery .media.see {
+  margin-top: 7em;
+  display: block;
+}
+main .gallery .media.see img {
+  max-width: 98%;
+  max-height: 100%;
+}
 main .about {
   padding: 1em;
   border-radius: 15px;
