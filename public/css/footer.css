@@ -14,6 +14,9 @@ footer div .footerleft {
   justify-content: flex-start;
   border-right: solid 2px black;
 }
+footer div .footerleft h3 {
+  margin: 0;
+}
 footer div .footerright {
   padding: 0;
   display: flex;
@@ -25,11 +28,15 @@ footer div .footerright div {
   justify-content: flex-start;
 }
 footer div .footerright div .footermenu {
+  margin-right: 1em;
   padding: 0;
   flex-basis: 0;
   flex-direction: column;
   justify-content: flex-start;
   flex-basis: 35%;
+}
+footer div .footerright div .footermenu:last-child {
+  margin: 0;
 }
 footer div .footerright div .footermenu h3 {
   margin: 0 0 1em 0;
@@ -44,5 +51,8 @@ footer div .footerright .copyright {
   align-self: stretch;
 }
 footer div .footerright .copyright a {
-  margin-right: 1em;
+  margin-right: 0.5em;
+}
+footer div .footerright .copyright a:last-child {
+  margin: 0;
 }/*# sourceMappingURL=footer.css.map */
