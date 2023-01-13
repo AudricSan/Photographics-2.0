@@ -87,4 +87,85 @@ main {
             }
         }
     }
+
+    .about {
+        padding: 1em;
+        border-radius: 15px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2), 0px 0px 1px rgba(9, 30, 66, 0.31);
+
+        max-width: 500px;
+        margin: 1em 0 2em 1em;
+
+        h2,
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+        }
+    }
+
+    &:has(.contact) {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .contact {
+        padding: 1em;
+        border-radius: 15px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2), 0px 0px 1px rgba(9, 30, 66, 0.31);
+
+        max-width: 400px;
+        margin: 1em 1em 2em 0em;
+
+        h2 {
+            margin-bottom: 0.3em;
+        }
+
+        p {
+            margin-bottom: 1.5em;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                margin-bottom: 0.2em;
+            }
+
+            input,
+            textarea {
+                margin-bottom: 1em;
+            }
+
+            textarea {
+                min-height: 150px;
+                max-width: 310px;
+
+                text-overflow: ellipsis;
+                resize: none;
+
+                &::-webkit-scrollbar {
+                    width: 10px;
+                    height: 10px;
+                }
+
+                &::-webkit-scrollbar-track-piece {
+                    background-color: #eeeeee;
+                    border-radius: 16px;
+                }
+
+                &::-webkit-scrollbar-thumb:vertical {
+                    height: 10px;
+                    background-color: #666;
+                    border: 1px solid #eee;
+                    border-radius: 16px;
+                }
+            }
+        }
+    }
 }
