@@ -65,7 +65,7 @@ Route::add('/contact', function () {
 
 Route::add('/admin', function () {
   head();
-  include_once('../view/admin/index.html');
+  include_once('../view/admin/index.php');
   foot();
 });
 
