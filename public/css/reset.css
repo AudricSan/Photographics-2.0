@@ -28,4 +28,24 @@ ul {
 }
 ul li {
   list-style: none;
+}
+
+.xe-warning {
+  all: unset;
+}
+
+.xdebug-var-dump,
+.xdebug-error {
+  font-size: medium;
+  position: absolute;
+  top: 1px;
+  padding: 1em;
+  border-radius: 15px;
+  background-color: lightsteelblue;
+  color: black;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2), 0px 0px 1px rgba(9, 30, 66, 0.31);
+}
+
+.xdebug-error {
+  background-color: #f0bc89;
 }/*# sourceMappingURL=reset.css.map */
