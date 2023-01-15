@@ -38,9 +38,10 @@ Route::add('/', function () {
   gallery(false);
   foot();
 });
+
 Route::add('/([0-9]*)', function ($id) {
   head();
-  gallery($id);
+  include_once('../view/see.html');
   foot();
 });
 
@@ -52,13 +53,19 @@ Route::add('/about', function () {
 
 Route::add('/privacy', function () {
   head();
-  include_once('../view/privacy.html');
+  include_once('../view/privacy.php');
   foot();
 });
 
 Route::add('/contact', function () {
   head();
   include_once('../view/contact.html');
+  foot();
+});
+
+Route::add('/admin', function () {
+  head();
+  include_once('../view/admin/index.html');
   foot();
 });
 
