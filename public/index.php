@@ -3,6 +3,9 @@
 // Use this namespace
 use photographics\Route;
 
+// Session
+session_start();
+
 // Include class
 include '../model/class/Route.php';
 include '../model/class/env.php';
@@ -64,8 +67,15 @@ Route::add('/contact', function () {
 });
 
 Route::add('/admin', function () {
+  include_once('../model/dao/AdminDAO.php');
   head();
   include_once('../view/admin/index.php');
+  foot();
+});
+
+Route::add('/admin/login', function () {
+  head();
+  include_once('../view/admin/login.php');
   foot();
 });
 
