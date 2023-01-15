@@ -1,3 +1,8 @@
+<?php
+session_start();
+var_dump($_SESSION);
+?>
+
 <nav class="admin">
     <ul>
         <li>
@@ -45,8 +50,7 @@
             <h3>$picture->_name</h3>
 
             <form method='POST' action='/basicinfo/$value->_id/edit/' target='_self'>
-                <label for='content'>New data : </label><textarea id='content' name='content'
-                    required>$value->_content</textarea>
+                <label for='content'>New data : </label><textarea id='content' name='content' required>$value->_content</textarea>
                 <select name='content' id='pictureSelect'>
                     <option value='$picture->_id'></option><input type='text' id='content' name='content' required>
                     <input type='number' name='id' value='$value->_id' required style='display:none'>
