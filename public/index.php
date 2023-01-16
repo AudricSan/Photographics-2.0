@@ -35,7 +35,7 @@ function adnav()
   include_once('include/adnav.html');
 }
 
-// SECTION Base Route
+// Base Route
 Route::add('/', function () {
   head();
   gallery(false);
@@ -66,6 +66,8 @@ Route::add('/contact', function () {
   foot();
 });
 
+
+// Admin route
 Route::add('/admin', function () {
   include_once('../model/dao/AdminDAO.php');
   head();
@@ -78,6 +80,14 @@ Route::add('/admin/login', function () {
   include_once('../view/admin/login.php');
   foot();
 });
+
+Route::add('/admin/log', function () {
+  include_once('../model/class/Admin.php');
+  include_once('../model/dao/AdminDAO.php');
+
+  $adminDAO = new AdminDAO;
+  $adminDAO->login($_POST);
+}, 'post');
 
 
 
