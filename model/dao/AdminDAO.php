@@ -195,37 +195,40 @@ class AdminDAO extends Env
 
     public function login($data)
     {
+        session_unset();
+        $error = [];
+
         if (!isset($data)) {
-            echo 'NOT DATA SET';
-            // header('location: /');
-            return false;
+            $error[] = "No Data Set";
         }
 
-        if (!isset($data['login']) || !isset($data['pass'])) {
-            echo 'NOT LOGIN OR PASSOWRD SET';
-            // header('location: /');
-            return false;
+        if (empty($data['login']) || empty($data['pass'])) {
+            $error[] = "Not Login Or Passowrd Set";
+        }
+
+        if (isset($error)) {
+            goto error;
         }
 
         $existAdmin = $this->fetchByMail($data['login']);
         if (!$existAdmin) {
-            echo 'NOT EXIST';
-            // header('location: /');
-            return false;
+            $error[] = "Not Exist";
+            goto error;
         }
 
         $pass = $data['pass'];
         $dbpass = $existAdmin->_password;
 
         if (!password_verify($pass, $dbpass)) {
-            echo 'NOT NOT GOOD PASS';
-            // header('location: /');
-            return false;
+            $error[] = "Not Not Good Pass Or User Not Exist";
+            goto error;
         }
 
-        session_start();
         $_SESSION['logged'] = $existAdmin->_id;
-
         header('location: /admin');
+
+        error:
+        $_SESSION['error'] = $error;
+        header('location: /admin/login');
     }
 }
