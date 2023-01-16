@@ -156,10 +156,33 @@ main .login img {
   margin-bottom: 2em;
 }
 main .login form {
+  margin: 0.2em;
   display: flex;
   flex-direction: column;
+  width: 20em;
+}
+main .login form label {
+  margin-top: 0.3em;
+}
+main .login form input {
+  margin-top: 0.1em;
+}
+main .login form input[type=submit] {
+  margin-top: 1em;
+  padding: 0.5em;
 }
 main:has(.login) {
   display: flex;
   justify-content: center;
+}
+main .error {
+  margin-bottom: 1em;
+}
+main .error p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main .error p span {
+  color: red;
 }/*# sourceMappingURL=index.css.map */
