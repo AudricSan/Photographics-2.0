@@ -69,7 +69,9 @@ Route::add('/contact', function () {
 
 // Admin route
 Route::add('/admin', function () {
+  include_once('../model/class/Admin.php');
   include_once('../model/dao/AdminDAO.php');
+
   head();
   include_once('../view/admin/index.php');
   foot();
@@ -87,6 +89,25 @@ Route::add('/admin/log', function () {
 
   $adminDAO = new AdminDAO;
   $adminDAO->login($_POST);
+}, 'post');
+
+Route::add('/admin/add', function () {
+  include_once('../model/class/Admin.php');
+  include_once('../model/dao/AdminDAO.php');
+  include_once('../model/class/Role.php');
+  include_once('../model/dao/RoleDAO.php');
+
+  head();
+  include_once('../view/admin/addPoeple.php');
+  foot();
+});
+
+Route::add('/admin/add/new', function () {
+  include_once('../model/class/Admin.php');
+  include_once('../model/dao/AdminDAO.php');
+
+  $adminDAO = new AdminDAO;
+  $adminDAO->store($_POST);
 }, 'post');
 
 
