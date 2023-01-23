@@ -119,6 +119,31 @@ class AdminDAO extends Env
             return false;
         }
 
+        session_unset();
+        $error = [];
+
+        $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+        if (!preg_match($password_regex, $data['pass'])) {
+            $error[] = "Has a minimum of 8 characters, an upper case letter, a lower case letter, a number and a special character.";
+        }
+
+        $data['mail'] = filter_var($data['mail'], FILTER_VALIDATE_EMAIL);
+
+        if ($data['mail'] === false) {
+            $error[] = "Email Not Set Or not Correct";
+        }
+
+        if ($data['mail'] == $this->fetchByMail($data['mail'])) {
+            $error[] = "Already Exist";
+        }
+
+        if (isset($error) && !empty($error)) {
+            $_SESSION['error'] = $error;
+            header('location: /admin/add');
+        }
+
+        $data['pass'] = password_hash($data['pass'], PASSWORD_BCRYPT);
+        
         $admin = $this->create([
             "admin_id"       => 0,
             'admin_mail'     => $data['mail'],
@@ -206,7 +231,7 @@ class AdminDAO extends Env
             $error[] = "Not Login Or Passowrd Set";
         }
 
-        if (isset($error)) {
+        if (isset($error) && !empty($error)) {
             goto error;
         }
 
@@ -226,6 +251,7 @@ class AdminDAO extends Env
 
         $_SESSION['logged'] = $existAdmin->_id;
         header('location: /admin');
+        return true;
 
         error:
         $_SESSION['error'] = $error;
