@@ -3,7 +3,6 @@
 if (!isset($_SESSION['logged'])) {
     header("location: /admin/login");
     die;
-
 } else {
     $adminDAO = new AdminDAO;
     $adminConnected = $adminDAO->fetch($_SESSION['logged']);
@@ -18,9 +17,9 @@ if (!isset($_SESSION['logged'])) {
 if (isset($id)) {
     $adminDAO = new AdminDAO;
     $admin = $adminDAO->fetch($id);
-    $link = '/admin/add/edit';
+    $link = '/admin/poeple/edit';
 } else {
-    $link = '/admin/add/new';
+    $link = '/admin/poeple/new';
 }
 
 $roleDAO = new RoleDAO;
@@ -48,7 +47,7 @@ $roles = $roleDAO->fetchAll();
         }
         ?>
 
-        <form method='POST' action=' <?php echo"$link" ?> ' enctype='multipart/form-data' target='_self'>
+        <form method='POST' action=' <?php echo "$link" ?> ' enctype='multipart/form-data' target='_self'>
             <label for='name'>Name :</label>
             <input type='text' id='name' name='name' required>
 
@@ -63,7 +62,6 @@ $roles = $roleDAO->fetchAll();
                 <p>Select Tags : </p>
                 <div>
                     <?php
-                    
                     foreach ($roles as $role) {
                         echo "
                         <label for='$role->_id'>$role->_name</label>
@@ -72,13 +70,15 @@ $roles = $roleDAO->fetchAll();
                             if ($role->_id = $admin->_role) {
                                 echo "checked >";
                             }
-                        }else {
+                        } else {
                             echo ">";
                         }
                     }
                     ?>
                 </div>
-            </div><input type='number' name='admin_id' value='$admin->_id' style='display:none'></input>
+            </div>
+
+            <input type='number' name='admin_id' value='' style='display:none'></input>
             <input class='btn validate' type='submit' value='Submit'>
         </form>
     </div>
