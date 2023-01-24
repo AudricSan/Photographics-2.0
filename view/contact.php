@@ -1,4 +1,4 @@
-<main>
+<main <?php if(isset($_SESSION['logged'])){ echo "class='admin'";}?>>
     <div class='contact'>
         <h2>Title</h2>
         <p> You like my work, do not hesitate to contact me.</p>
