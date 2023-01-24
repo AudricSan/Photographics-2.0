@@ -26,18 +26,18 @@ function head()
 
 function foot()
 {
-  include_once('include/footer.html');
+  include_once('include/footer.php');
 }
 
 function gallery($how)
 {
   $_GET['id'] = $how;
-  include_once('../view/index.html');
+  include_once('../view/index.php');
 }
 
 function adnav()
 {
-  include_once('include/adnav.html');
+  include_once('include/adnav.php');
 }
 
 // Base Route
@@ -49,13 +49,13 @@ Route::add('/', function () {
 
 Route::add('/([0-9]*)', function ($id) {
   head();
-  include_once('../view/see.html');
+  include_once('../view/see.php');
   foot();
 });
 
 Route::add('/about', function () {
   head();
-  include_once('../view/about.html');
+  include_once('../view/about.php');
   foot();
 });
 
@@ -67,7 +67,7 @@ Route::add('/privacy', function () {
 
 Route::add('/contact', function () {
   head();
-  include_once('../view/contact.html');
+  include_once('../view/contact.php');
   foot();
 });
 
@@ -85,16 +85,16 @@ Route::add('/admin/login', function () {
   foot();
 });
 
-//// Poeple
-Route::add('/admin/poeple', function () {
+//// User
+Route::add('/admin/user', function () {
   head();
-  include_once('../view/admin/poeple.php');
+  include_once('../view/admin/user.php');
   foot();
 });
 
-Route::add('/admin/newpeople', function () {
+Route::add('/admin/newuser', function () {
   head();
-  include_once('../view/admin/addPoeple.php');
+  include_once('../view/admin/addUser.php');
   foot();
 });
 
@@ -107,7 +107,7 @@ Route::add('/admin/picture', function () {
 
 Route::add('/admin/newpicture', function () {
   head();
-  include_once('../view/admin/picture.php');
+  include_once('../view/admin/addPicture.php');
   foot();
 });
 
@@ -118,9 +118,9 @@ Route::add('/admin/tag', function () {
   foot();
 });
 
-Route::add('/admin/tag/add', function () {
+Route::add('/admin/newtag', function () {
   head();
-  include_once('../view/admin/tag.php');
+  include_once('../view/admin/addTag.php');
   foot();
 });
 
