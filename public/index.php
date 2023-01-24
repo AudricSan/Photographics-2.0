@@ -85,25 +85,40 @@ Route::add('/admin/login', function () {
   foot();
 });
 
-Route::add('/admin/add', function () {
-  head();
-  include_once('../view/admin/addPoeple.php');
-  foot();
-});
-
+//// Poeple
 Route::add('/admin/poeple', function () {
   head();
   include_once('../view/admin/poeple.php');
   foot();
 });
 
+Route::add('/admin/newpeople', function () {
+  head();
+  include_once('../view/admin/addPoeple.php');
+  foot();
+});
+
+//// Picture
 Route::add('/admin/picture', function () {
   head();
   include_once('../view/admin/picture.php');
   foot();
 });
 
+Route::add('/admin/newpicture', function () {
+  head();
+  include_once('../view/admin/picture.php');
+  foot();
+});
+
+//// Tags
 Route::add('/admin/tag', function () {
+  head();
+  include_once('../view/admin/tag.php');
+  foot();
+});
+
+Route::add('/admin/tag/add', function () {
   head();
   include_once('../view/admin/tag.php');
   foot();
@@ -126,7 +141,7 @@ Route::add('/admin/log', function () {
   $adminDAO->login($_POST);
 }, 'post');
 
-Route::add('/admin/add/new', function () {
+Route::add('/admin/new', function () {
   include_once('../model/class/Admin.php');
   include_once('../model/dao/AdminDAO.php');
 
