@@ -43,8 +43,6 @@ if (!isset($_SESSION['logged'])) {
                     </td>
                 </tr>
             </tbody>
-
-
         </table>
     </div>
 </main>
