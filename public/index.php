@@ -97,19 +97,19 @@ Route::add('/admin/poeple', function () {
   foot();
 });
 
-Route::add('/admin/poeple', function () {
+Route::add('/admin/picture', function () {
   head();
   include_once('../view/admin/picture.php');
   foot();
 });
 
-Route::add('/admin/poeple', function () {
+Route::add('/admin/tag', function () {
   head();
   include_once('../view/admin/tag.php');
   foot();
 });
 
-Route::add('/admin/poeple', function () {
+Route::add('/admin/doc', function () {
   head();
   include_once('../view/admin/doc.php');
   foot();
