@@ -97,6 +97,28 @@ Route::add('/admin/poeple', function () {
   foot();
 });
 
+Route::add('/admin/poeple', function () {
+  head();
+  include_once('../view/admin/picture.php');
+  foot();
+});
+
+Route::add('/admin/poeple', function () {
+  head();
+  include_once('../view/admin/tag.php');
+  foot();
+});
+
+Route::add('/admin/poeple', function () {
+  head();
+  include_once('../view/admin/doc.php');
+  foot();
+});
+
+Route::add('/admin/disconnect', function () {
+  $adminDAO = new AdminDAO;
+  $adminDAO->disconnect();
+});
 
 // Admin edition Route
 Route::add('/admin/log', function () {
