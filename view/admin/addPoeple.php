@@ -27,8 +27,6 @@ $roleDAO = new RoleDAO;
 $roles = $roleDAO->fetchAll();
 
 ?>
-
-</header>
 <main>
     <div class='add'>
 

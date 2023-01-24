@@ -1,4 +1,3 @@
-</header>
 <main>
     <div class='privacy'>
         <?php

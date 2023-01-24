@@ -6,7 +6,6 @@ $_SESSION['TLink'] = $link;
 
 ?>
 
-</header>
 <main>
     <div class='login'>
         <img src='../public/images/logoadmin.png' alt='Photographics Admin Logo'>
