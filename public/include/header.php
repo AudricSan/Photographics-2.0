@@ -44,49 +44,51 @@
     </nav>
 
     <?php
-        $adminDAO = new AdminDAO;
+    $adminDAO = new AdminDAO;
 
+    if (isset($_SESSION['logged'])) {
         if ($adminDAO->fetch($_SESSION['logged'])) {
             echo "
-            <nav class='admin'>
-                <ul>
-                    <li>
-                        <i class='fa-solid fa-house'></i>
-                        <a href=''>dashboard</a>
-                    </li>
-            
-                    <li>
-                        <i class='fa-solid fa-house'></i>
-                        <a href=''>Pictures Dashborad</a>
-                    </li>
-            
-                    <li>
-                        <i class='fa-solid fa-house'></i>
-                        <a href=''>Tags Dashboard</a>
-                    </li>
-            
-                    <li>
-                        <i class='fa-solid fa-house'></i>
-                        <a href=''>Poeple dashboard</a>
-                    </li>
-            
-                    <li>
-                        <i class='fa-solid fa-house'></i>
-                        <a href=''>Documentation</a>
-                    </li>
-            
-                    <li>
-                        <i class='fa-solid fa-house'></i>
-                        <a href=''>Bugs Report</a>
-                    </li>
-            
-                    <li>
-                        <i class='fa-solid fa-house'></i>
-                        <a href=''>DISCONNECTED</a>
-                    </li>
-                </ul>
-            </nav>
+                <nav class='admin'>
+                    <ul>
+                        <li>
+                            <i class='fa-solid fa-house'></i>
+                            <a href='/admin'>dashboard</a>
+                        </li>
+                
+                        <li>
+                            <i class='fa-solid fa-house'></i>
+                            <a href='/admin/picture'>Pictures Dashborad</a>
+                        </li>
+                
+                        <li>
+                            <i class='fa-solid fa-house'></i>
+                            <a href='/admin/tag'>Tags Dashboard</a>
+                        </li>
+                
+                        <li>
+                            <i class='fa-solid fa-house'></i>
+                            <a href='/admin/poeple'>Poeple dashboard</a>
+                        </li>
+                
+                        <li>
+                            <i class='fa-solid fa-house'></i>
+                            <a href='/amdin/doc'>Documentation</a>
+                        </li>
+                
+                        <li>
+                            <i class='fa-solid fa-house'></i>
+                            <a href='https://github.com/AudricSan/Photographics/issues' target='_BLANC'>Bugs Report</a>
+                        </li>
+                
+                        <li>
+                            <i class='fa-solid fa-house'></i>
+                            <a href='/admin/disconnect'>DISCONNECTED</a>
+                        </li>
+                    </ul>
+                </nav>
             ";
         }
+    }
     ?>
 </header>
