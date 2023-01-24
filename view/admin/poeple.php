@@ -19,7 +19,7 @@ if (!isset($_SESSION['logged'])) {
 ?>
 <main class="admin">
     <div class='poeple'>
-        <h1> <a href='/admin/admin/add' class='btn additems success'> <span class='material-icons-round'> add </span> </a> </h1>
+        <h1> <a href='/admin/admin/add' > <i class="fa-solid fa-user-plus"></i> </a> </h1>
 
         <table>
             <thead>
