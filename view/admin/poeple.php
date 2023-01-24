@@ -19,7 +19,7 @@ if (!isset($_SESSION['logged'])) {
 ?>
 <main class="admin">
     <div class='poeple'>
-        <h1> <a href='/admin/admin/add' > <i class="fa-solid fa-user-plus"></i> </a> </h1>
+        <h1> <a href='/admin/newpeople' > <i class="fa-solid fa-user-plus"></i> </a> </h1>
 
         <table>
             <thead>
@@ -33,13 +33,12 @@ if (!isset($_SESSION['logged'])) {
 
             <tbody>
                 <tr>
-                    <td> $admin->_name </td>
-                    <td> $admin->_mail </td>
-                    <td></td>
-
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
                     <td class=action>
-                        <a class='btn edit' href='/admin/add/$admin->_id'>Edit</a>
-                        <a class='btn delete' href='/admin/delete/$admin->_id'>Delete</a>
+                        <a class='btn edit' href='/admin/poeple/add/'>Edit</a>
+                        <a class='btn delete' href='/admin/poeple/delete/'>Delete</a>
                     </td>
                 </tr>
             </tbody>
