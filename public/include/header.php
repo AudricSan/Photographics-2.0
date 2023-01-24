@@ -69,7 +69,7 @@
                 
                         <li>
                             <i class='fa-solid fa-house'></i>
-                            <a href='/admin/poeple'>Poeple dashboard</a>
+                            <a href='/admin/user'>User dashboard</a>
                         </li>
                 
                         <li>
