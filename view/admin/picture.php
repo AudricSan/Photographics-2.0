@@ -46,8 +46,8 @@ if (!isset($_SESSION['logged'])) {
                 <td> </td>
                 <td> <input type='checkbox' disabled> </td>
                 <td>
-                    <a class='btn edit' href='/admin/picture/add/'>Edit</a>
-                    <a class='btn error' href='/admin/picture/delete/'>Delete</a>
+                    <a class='btn edit' href=''>Edit</a>
+                    <a class='btn error' href=''>Delete</a>
                 </td>
             </tr>
         </tbody>
