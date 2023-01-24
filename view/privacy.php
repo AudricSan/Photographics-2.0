@@ -1,4 +1,4 @@
-<main>
+<main <?php if(isset($_SESSION['logged'])){ echo "class='admin'";}?>>
     <div class='privacy'>
         <?php
 
