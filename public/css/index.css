@@ -2,6 +2,9 @@ main {
   margin-top: 5em;
   padding: 1em;
 }
+main.admin {
+  margin-top: 8em;
+}
 main .card {
   padding: 0.7em;
   background-color: white;
@@ -139,9 +142,6 @@ main .privacy h1 {
 }
 main .privacy h2 {
   margin: 0.3em 0 0.1em 0;
-}
-main .admin {
-  margin-top: 4em;
 }
 main .login {
   margin: 5em 0 5em 0;
