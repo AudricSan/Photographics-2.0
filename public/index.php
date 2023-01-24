@@ -10,13 +10,18 @@ session_start();
 include '../model/class/Route.php';
 include '../model/class/env.php';
 
+include_once('../model/class/Admin.php');
+include_once('../model/dao/AdminDAO.php');
+include_once('../model/class/Role.php');
+include_once('../model/dao/RoleDAO.php');
+
 // Define a global basepath
 define('BASEPATH', '/');
 
 // This function is used to make the elements of the main page
 function head()
 {
-  include_once('include/header.html');
+  include_once('include/header.php');
 }
 
 function foot()
@@ -67,11 +72,8 @@ Route::add('/contact', function () {
 });
 
 
-// Admin route
+// Admin page route
 Route::add('/admin', function () {
-  include_once('../model/class/Admin.php');
-  include_once('../model/dao/AdminDAO.php');
-
   head();
   include_once('../view/admin/index.php');
   foot();
@@ -83,24 +85,24 @@ Route::add('/admin/login', function () {
   foot();
 });
 
-Route::add('/admin/log', function () {
-  include_once('../model/class/Admin.php');
-  include_once('../model/dao/AdminDAO.php');
-
-  $adminDAO = new AdminDAO;
-  $adminDAO->login($_POST);
-}, 'post');
-
 Route::add('/admin/add', function () {
-  include_once('../model/class/Admin.php');
-  include_once('../model/dao/AdminDAO.php');
-  include_once('../model/class/Role.php');
-  include_once('../model/dao/RoleDAO.php');
-
   head();
   include_once('../view/admin/addPoeple.php');
   foot();
 });
+
+Route::add('/admin/poeple', function () {
+  head();
+  include_once('../view/admin/poeple.php');
+  foot();
+});
+
+
+// Admin edition Route
+Route::add('/admin/log', function () {
+  $adminDAO = new AdminDAO;
+  $adminDAO->login($_POST);
+}, 'post');
 
 Route::add('/admin/add/new', function () {
   include_once('../model/class/Admin.php');
