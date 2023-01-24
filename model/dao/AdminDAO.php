@@ -257,4 +257,10 @@ class AdminDAO extends Env
         $_SESSION['error'] = $error;
         header('location: /admin/login');
     }
+    
+    public function disconnect()
+    {
+        session_unset();
+        header('location: /');
+    }
 }
