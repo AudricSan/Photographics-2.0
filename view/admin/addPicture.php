@@ -30,6 +30,8 @@ if (isset($id)) {
 ?>
 
 <main>
+    <h2>Add Picture</h2>
+
     <form method='POST' action='' enctype='multipart/form-data' target='_self'>
         <label for='title'>Image Title :</label>
         <input type='text' id='title' name='title'"; if (isset($picture)) {echo " value='$picture->_name'";} echo" required>
