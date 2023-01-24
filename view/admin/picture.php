@@ -19,10 +19,8 @@ if (!isset($_SESSION['logged'])) {
 
 <main class="admin">
     <h1>
-        <a href='/admin/picture/add'>
-            <i class="fi fi-br-layer-plus"></i>
-            <i class="fi fi-br-plus"></i>
-            <i class="fa-solid fa-plus"></i>
+        <a href='/admin/newpicture'>
+            <i class="fa-solid fa-image"></i>
         </a>
     </h1>
 
@@ -48,8 +46,8 @@ if (!isset($_SESSION['logged'])) {
                 <td> </td>
                 <td> <input type='checkbox' disabled> </td>
                 <td>
-                    <a class='btn success' href='/admin/picture/add/$picture->_id'>Edit</a>
-                    <a class='btn error' href='/admin/picture/delete/$picture->_id'>Delete</a>
+                    <a class='btn edit' href='/admin/picture/add/'>Edit</a>
+                    <a class='btn error' href='/admin/picture/delete/'>Delete</a>
                 </td>
             </tr>
         </tbody>
