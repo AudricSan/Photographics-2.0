@@ -31,6 +31,7 @@
 
     <!--icones importées-->
     <script src='https://kit.fontawesome.com/eb747bd21c.js' crossorigin='anonymous'></script>
+
 </head>
 
 <header>
@@ -73,7 +74,7 @@
                 
                         <li>
                             <i class='fa-solid fa-house'></i>
-                            <a href='/amdin/doc'>Documentation</a>
+                            <a href='/admin/doc'>Documentation</a>
                         </li>
                 
                         <li>
