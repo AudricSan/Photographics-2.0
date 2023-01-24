@@ -6,6 +6,26 @@ main {
         margin-top: 8em;
     }
 
+    &.error {
+        margin-top: 8em;
+        margin-bottom: 3em;
+
+        p {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            span {
+                color: red;
+            }
+        }
+    }
+
+    &:has(.login) {
+        display: flex;
+        justify-content: center;
+    }
+
     .card {
         padding: 0.7em;
         background-color: white;
@@ -221,22 +241,4 @@ main {
         }
     }
 
-    &:has(.login) {
-        display: flex;
-        justify-content: center;
-    }
-
-    .error {
-        margin-bottom: 1em;
-
-        p {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            span {
-                color: red;
-            }
-        }
-    }
 }
