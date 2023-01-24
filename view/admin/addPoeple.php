@@ -1,19 +1,19 @@
 <?php
 
-// if (!isset($_SESSION['logged'])) {
-//     header("location: /admin/login");
-//     die;
+if (!isset($_SESSION['logged'])) {
+    header("location: /admin/login");
+    die;
 
-// } else {
-//     $adminDAO = new AdminDAO;
-//     $adminConnected = $adminDAO->fetch($_SESSION['logged']);
+} else {
+    $adminDAO = new AdminDAO;
+    $adminConnected = $adminDAO->fetch($_SESSION['logged']);
 
-//     if (!$adminConnected) {
-//         session_unset();
-//         header("location: /");
-//         die;
-//     }
-// }
+    if (!$adminConnected) {
+        session_unset();
+        header("location: /");
+        die;
+    }
+}
 
 if (isset($id)) {
     $adminDAO = new AdminDAO;
@@ -27,7 +27,7 @@ $roleDAO = new RoleDAO;
 $roles = $roleDAO->fetchAll();
 
 ?>
-<main>
+<main class="admin">
     <div class='add'>
 
         <h2>Add Poeple</h2>
@@ -63,14 +63,16 @@ $roles = $roleDAO->fetchAll();
                 <p>Select Tags : </p>
                 <div>
                     <?php
+                    
                     foreach ($roles as $role) {
                         echo "
                         <label for='$role->_id'>$role->_name</label>
                         <input required type='radio' id='$role->_id' name='role' value='$role->_id'";
-
-                        if ($role->_id = $admin->_role) {
-                            echo "checked >";
-                        } else {
+                        if (isset($admin)) {
+                            if ($role->_id = $admin->_role) {
+                                echo "checked >";
+                            }
+                        }else {
                             echo ">";
                         }
                     }
