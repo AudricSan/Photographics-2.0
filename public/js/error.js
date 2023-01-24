@@ -7,5 +7,5 @@ error.classList.add('MyXdebug')
 console.log(pre)
 
 pre.forEach(e => {
-    error.appendChild(e);
-});
+    error.appendChild(e)
+})
