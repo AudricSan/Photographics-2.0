@@ -42,3 +42,51 @@
             <li> <a href='/contact'>Contact</a> </li>
         </ul>
     </nav>
+
+    <?php
+        $adminDAO = new AdminDAO;
+
+        if ($adminDAO->fetch($_SESSION['logged'])) {
+            echo "
+            <nav class='admin'>
+                <ul>
+                    <li>
+                        <i class='fa-solid fa-house'></i>
+                        <a href=''>dashboard</a>
+                    </li>
+            
+                    <li>
+                        <i class='fa-solid fa-house'></i>
+                        <a href=''>Pictures Dashborad</a>
+                    </li>
+            
+                    <li>
+                        <i class='fa-solid fa-house'></i>
+                        <a href=''>Tags Dashboard</a>
+                    </li>
+            
+                    <li>
+                        <i class='fa-solid fa-house'></i>
+                        <a href=''>Poeple dashboard</a>
+                    </li>
+            
+                    <li>
+                        <i class='fa-solid fa-house'></i>
+                        <a href=''>Documentation</a>
+                    </li>
+            
+                    <li>
+                        <i class='fa-solid fa-house'></i>
+                        <a href=''>Bugs Report</a>
+                    </li>
+            
+                    <li>
+                        <i class='fa-solid fa-house'></i>
+                        <a href=''>DISCONNECTED</a>
+                    </li>
+                </ul>
+            </nav>
+            ";
+        }
+    ?>
+</header>
