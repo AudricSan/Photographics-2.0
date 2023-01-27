@@ -100,12 +100,6 @@ Route::add('/admin/newuser', function () {
   foot();
 });
 
-Route::add('/admin/deluser', function () {
-  var_dump($_GET);
-  $adminDAO = new AdminDAO;
-  $adminDAO->delete($_GET);
-}, 'get');
-
 //// Picture
 Route::add('/admin/picture', function () {
   head();
@@ -149,13 +143,31 @@ Route::add('/admin/log', function () {
   $adminDAO->login($_POST);
 }, 'post');
 
-Route::add('/admin/new', function () {
+Route::add('/admin/adduser', function () {
   include_once('../model/class/Admin.php');
   include_once('../model/dao/AdminDAO.php');
 
   $adminDAO = new AdminDAO;
   $adminDAO->store($_POST);
 }, 'post');
+
+Route::add('/admin/edituser', function () {
+  include_once('../model/class/Admin.php');
+  include_once('../model/dao/AdminDAO.php');
+
+  $adminDAO = new AdminDAO;
+  $adminDAO->update($_POST['id'], $_POST);
+}, 'post');
+
+Route::add('/admin/deluser', function () {
+  var_dump($_GET);
+  $adminDAO = new AdminDAO;
+  $adminDAO->delete($_GET['user']);
+}, 'get');
+
+Route::add('/admin/deluser', function () {
+
+}, 'get');
 
 
 
