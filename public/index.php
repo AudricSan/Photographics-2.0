@@ -1,6 +1,8 @@
 <?php
 
 // Use this namespace
+
+use photographics\Admin;
 use photographics\Route;
 
 // Session
@@ -97,6 +99,12 @@ Route::add('/admin/newuser', function () {
   include_once('../view/admin/addUser.php');
   foot();
 });
+
+Route::add('/admin/deluser', function () {
+  var_dump($_GET);
+  $adminDAO = new AdminDAO;
+  $adminDAO->delete($_GET);
+}, 'get');
 
 //// Picture
 Route::add('/admin/picture', function () {
