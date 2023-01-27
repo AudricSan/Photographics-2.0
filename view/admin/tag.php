@@ -20,6 +20,19 @@ if (!isset($_SESSION['logged'])) {
 <main class="admin">
     <h1> <a href='/admin/newtag'> <i class="fa-solid fa-tags"></i> </a> </h1>
 
+    <?php
+    if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+        $error = $_SESSION['error'];
+        echo "
+                <div class='error'>
+                <p> Something Wrong : <span> $error </span></p>
+        ";
+        unset($_SESSION['error']);
+        }
+
+        echo "</div>";
+    ?>
+
     <table>
         <thead>
             <tr>
@@ -29,16 +42,26 @@ if (!isset($_SESSION['logged'])) {
             </tr>
         </thead>
 
-        <tbody>
-            <tr>
-                <td> </td>
-                <td> </td>
-                <td class=action with=500>
-                    <a class='btn edit' href=''>Edit</a>
-                    <a class='btn error' href=''>Delete</a>
-                </td>
-            </tr>
-        </tbody>
+        <?php
+        $tagDAO = new TagDAO;
+        $tags = $tagDAO->fetchAll();
+
+        foreach ($tags as $tag) {
+            echo "
+                <tbody>
+                    <tr>
+                        <td> $tag->_name </td>
+                        <td> $tag->_description </td>
+
+                        <td class=action>
+                            <a class='btn edit'   href='/admin/newtag?tag=$tag->_id'>Edit</a>
+                            <a class='btn delete' href='/admin/deltag?tag=$tag->_id'>Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            ";
+        }
+        ?>
     </table>
 </div>
 </main>
