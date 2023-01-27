@@ -59,6 +59,19 @@ class TagDAO extends Env
             var_dump($e);
         }
     }
+    
+    public function fetchByName($name)
+    {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE tag_name = ?");
+            $statement->execute([$name]);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $this->create($result);
+        } catch (PDOException $e) {
+            var_dump($e);
+        }
+    }
 
     public function create($result)
     {
@@ -94,10 +107,11 @@ class TagDAO extends Env
                 var_dump($e->getMessage());
             }
         }else{
-            $_SESSION['error']['tags']['delete'] = "You can't have less than 1 Tag";
+            $_SESSION['error'] = "You can't have less than 1 Tag";
         }
 
-        echo "<script language='Javascript'>document.location.replace('/admin/tag');</script>";
+        header('location: /admin/tag');
+        die;
     }
 
     public function store($data)
@@ -105,6 +119,12 @@ class TagDAO extends Env
 
         if (empty($data)) {
             return false;
+        }
+
+        if ($this->fetchByName($data['title'])) {
+            $_SESSION['error'] = 'Already Exist';
+            header('location: /admin/newtag');
+            die;
         }
 
         $tag = $this->create([
@@ -125,7 +145,9 @@ class TagDAO extends Env
                 echo $e;
             }
         }
+
         header('location: /admin/tag');
+        die;
     }
 
     public function update($id, $data)
