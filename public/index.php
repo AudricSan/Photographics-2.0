@@ -12,10 +12,17 @@ session_start();
 include '../model/class/Route.php';
 include '../model/class/env.php';
 
+// Admin Class & DAO
 include_once('../model/class/Admin.php');
 include_once('../model/dao/AdminDAO.php');
+
+// Role Class & DAO
 include_once('../model/class/Role.php');
 include_once('../model/dao/RoleDAO.php');
+
+// Tag Class & DAO
+include_once('../model/class/Tag.php');
+include_once('../model/dao/TagDAO.php');
 
 // Define a global basepath
 define('BASEPATH', '/');
@@ -144,17 +151,11 @@ Route::add('/admin/log', function () {
 }, 'post');
 
 Route::add('/admin/adduser', function () {
-  include_once('../model/class/Admin.php');
-  include_once('../model/dao/AdminDAO.php');
-
   $adminDAO = new AdminDAO;
   $adminDAO->store($_POST);
 }, 'post');
 
 Route::add('/admin/edituser', function () {
-  include_once('../model/class/Admin.php');
-  include_once('../model/dao/AdminDAO.php');
-
   $adminDAO = new AdminDAO;
   $adminDAO->update($_POST['id'], $_POST);
 }, 'post');
@@ -165,8 +166,21 @@ Route::add('/admin/deluser', function () {
   $adminDAO->delete($_GET['user']);
 }, 'get');
 
-Route::add('/admin/deluser', function () {
+// Tag edition Route
+Route::add('/admin/addtag', function () {
+  $tagDAO = new TagDAO;
+  $tagDAO->store($_POST);
+}, 'post');
 
+Route::add('/admin/edittag', function () {
+  $tagDAO = new TagDAO;
+  $tagDAO->update($_POST['id'], $_POST);
+}, 'post');
+
+Route::add('/admin/deltag', function () {
+  var_dump($_GET);
+  $tagDAO = new TagDAO;
+  $tagDAO->delete($_GET['tag']);
 }, 'get');
 
 
