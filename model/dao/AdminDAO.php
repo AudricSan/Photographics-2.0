@@ -107,9 +107,10 @@ class AdminDAO extends Env
             }
         } else {
             session_start();
-            $_SESSION['error']['admin']['delete'] = "You can't have less than 1 Admin";
+            $_SESSION['error'] = "You can't have less than 1 Admin";
         }
-        header('location: /admin/poeple');
+
+        header('location: /admin/user');
     }
 
     public function store($data)
@@ -168,7 +169,7 @@ class AdminDAO extends Env
             }
         }
 
-        header('location: /admin/poeple');
+        header('location: /admin/user');
     }
 
     public function update($id, $data)
@@ -182,7 +183,7 @@ class AdminDAO extends Env
 
         if ($data['mail'] === false) {
             echo 'false';
-            header('location: /admin/poeple');
+            header('location: /admin/user');
             return false;
         }
 
@@ -215,7 +216,7 @@ class AdminDAO extends Env
             }
         }
 
-        header('location: /admin/poeple');
+        header('location: /admin/user');
     }
 
     public function login($data)
