@@ -61,6 +61,7 @@ DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `tag_id` INTEGER NOT NULL AUTO_INCREMENT,
   `tag_name` VARCHAR(25) NULL DEFAULT NULL,
+  `tag_description` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`tag_id`)
 );
 
