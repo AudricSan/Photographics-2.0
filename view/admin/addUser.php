@@ -79,7 +79,7 @@ $roles = $roleDAO->fetchAll();
                 ?>
             </div>
         </div>
-        <input required type='hidden' id='id' name='id' value='$admin->_id'>
+        <input required type='hidden' id='id' name='id' value='<?php if (isset($admin)) {echo $admin->_id;} ?>'>
         <input class='btn validate' type='submit' value='Submit'>
     </form>
 </main>
