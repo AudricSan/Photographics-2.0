@@ -47,18 +47,12 @@ $roles = $roleDAO->fetchAll();
 
     <form method='POST' action=' <?php echo "$link" ?> ' enctype='multipart/form-data' target='_self'>
         <label for='name'>Name :</label>
-        <input type='text' id='name' name='name' required value='<?php if (isset($admin)) {
-                                                                        echo $admin->_name;
-                                                                    } ?>'>
+        <input type='text' id='name' name='name' required value='<?php if (isset($admin)) {echo $admin->_name;} ?>'>
 
         <label for='mail'>Mail :</label>
-        <input type='mail' id='mail' name='mail' required value='<?php if (isset($admin)) {
-                                                                        echo $admin->_mail;
-                                                                    } ?>'>
+        <input type='mail' id='mail' name='mail' required value='<?php if (isset($admin)) {echo $admin->_mail;} ?>'>
 
-        <label for='pass'> <?php if (isset($admin)) {
-                                echo "Confirm";
-                            } ?> Password :</label>
+        <label for='pass'> <?php if (isset($admin)) {echo "Confirm";} ?> Password :</label>
         <i class='bi bi-eye-slash' id='togglePassword'></i>
         <input type='password' id='pass' name='pass' required>
 
@@ -67,9 +61,6 @@ $roles = $roleDAO->fetchAll();
             <div>
                 <?php
                 foreach ($roles as $role) {
-                    // var_dump($role);
-                    // var_dump($admin->_role);
-
                     echo "
                         <label for='$role->_id'>$role->_name</label>
                         <input required type='radio' id='$role->_id' name='role' value='$role->_id'
