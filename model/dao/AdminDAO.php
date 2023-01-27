@@ -3,6 +3,8 @@
 use photographics\Admin;
 use photographics\Env;
 
+use function PHPSTORM_META\elementType;
+
 class AdminDAO extends Env
 {
     //DON'T TOUCH IT, LITTLE PRICK
@@ -115,12 +117,14 @@ class AdminDAO extends Env
 
     public function store($data)
     {
+        var_dump($data);
 
         if (empty($data)) {
-            return false;
+            $error[] = "No data Set";
+            goto error;
         }
 
-        session_unset();
+        unset($_SESSION['error']);
         $error = [];
 
         $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
@@ -134,13 +138,15 @@ class AdminDAO extends Env
             $error[] = "Email Not Set Or not Correct";
         }
 
-        if ($data['mail'] == $this->fetchByMail($data['mail'])) {
+        if ($this->fetchByMail($data['mail'])) {
             $error[] = "Already Exist";
         }
 
-        if (isset($error) && !empty($error)) {
+        if (!empty($error)) {
+            error:
             $_SESSION['error'] = $error;
-            header('location: /admin/add');
+            header('location: /admin/newuser');
+            die;
         }
 
         $data['pass'] = password_hash($data['pass'], PASSWORD_BCRYPT);
@@ -170,6 +176,7 @@ class AdminDAO extends Env
         }
 
         header('location: /admin/user');
+        die;
     }
 
     public function update($id, $data)
@@ -182,9 +189,8 @@ class AdminDAO extends Env
         $data['mail'] = filter_var($data['mail'], FILTER_VALIDATE_EMAIL);
 
         if ($data['mail'] === false) {
-            echo 'false';
             header('location: /admin/user');
-            return false;
+            die;
         }
 
         $admin = $this->create([
@@ -217,6 +223,7 @@ class AdminDAO extends Env
         }
 
         header('location: /admin/user');
+        die;
     }
 
     public function login($data)
