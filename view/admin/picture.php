@@ -40,6 +40,7 @@ if (!isset($_SESSION['logged'])) {
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Miniature</th>
                 <th>Name</th>
                 <th>Description</th>
@@ -54,9 +55,13 @@ if (!isset($_SESSION['logged'])) {
         $pictureDAO = new PictureDAO;
         $pictures = $pictureDAO->fetchAll();
 
-        var_dump($pictures);
+        $picturetagDAO = new PictureTagDAO;
+        $tagDAO = new TagDAO;
 
         foreach ($pictures as $picture) {
+            $pts = $picturetagDAO->fetchByPic($picture->_id);
+            // var_dump($pts);
+        
             echo "
                 <tbody>
                     <tr>
@@ -65,7 +70,20 @@ if (!isset($_SESSION['logged'])) {
                         <td> $picture->_name </td>
                         <td> $picture->_description </td>
                         <td> $picture->_link </td>
-                        <td> $picture->_tag </td>
+                        <td>";
+
+                        $cn = count($pts);
+                        foreach ($pts as $pt) {
+                            $tag = $tagDAO->fetch($pt->_tag);
+
+                            if (--$cn <= 0) {
+                                echo $tag->_name;
+                            }else{
+                                echo $tag->_name . ', ';
+                            }
+                        }
+                        echo "
+                        </td>
                         <td> $picture->_sharable </td>
 
                         <td class=action>

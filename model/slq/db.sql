@@ -46,7 +46,6 @@ CREATE TABLE `picture` (
   `picture_name` VARCHAR(50) NULL DEFAULT NULL,
   `picture_description` VARCHAR(500) NULL DEFAULT NULL,
   `picture_link` VARCHAR(25) NULL DEFAULT NULL,
-  `picture_tag` INTEGER NULL DEFAULT NULL,
   `picture_sharable` TINYINT(1) NULL DEFAULT NULL,
   PRIMARY KEY (`picture_id`)
 );

@@ -59,32 +59,6 @@ class PictureDAO extends Env
         }
     }
 
-    public function fetchTags()
-    {
-        try {
-            $statement = $this->connection->prepare("SELECT picture_tag, COUNT(picture_tag) FROM picture GROUP BY picture_tag");
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            return ($result);
-        } catch (PDOException $e) {
-            var_dump($e);
-        }
-    }
-
-    public function fetchByTag($id)
-    {
-        try {
-            $statement = $this->connection->prepare("SELECT picture_id FROM `picture` WHERE picture_tag = ?");
-            $statement->execute([$id]);
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            return ($result);
-        } catch (PDOException $e) {
-            var_dump($e);
-        }
-    }
-
     public function create($result)
     {
         if (!$result) {
@@ -96,7 +70,6 @@ class PictureDAO extends Env
             $result['picture_name'],
             $result['picture_description'],
             $result['picture_link'],
-            $result['picture_tag'],
             $result['picture_sharable']
         );
     }
@@ -183,61 +156,53 @@ class PictureDAO extends Env
             // die;
         }
 
-        var_dump($data);
-        $regex = '/tagid=[0-9]+/i';
-        $tags = [];
-        foreach ($data as $key => $value) {
-            if(preg_match ($regex, $key)){
-                $tags[] = $value;
-            }
-        }
-
-        var_dump($tags);
-        // MULTIPLE TAGG INPUT AND UPLOAD
-
-
-
-
-
-        die;
+        $nb = count($this->fetchAll());
+        ++$nb;
 
         $picture = $this->create([
             'picture_id' => 0,
             'picture_name' => $name,
             'picture_description' => $desc,
             'picture_link' => $image,
-            'picture_tag' => $data['tag'],
             'picture_sharable' => $share
         ]);
 
         if ($picture) {
             try {
                 $statement = $this->connection->prepare("INSERT INTO {$this->table} (
-                picture_name, picture_description, picture_link, picture_tag, picture_sharable) VALUES (?, ?, ?, ?, ?)");
+                picture_name, picture_description, picture_link, picture_sharable) VALUES (?, ?, ?, ?, ?)");
                 $statement->execute([
                     $picture->_name,
                     $picture->_description,
                     $picture->_link,
-                    $picture->_tag,
                     $picture->_sharable
                 ]);
 
                 $picture->_id = $this->connection->lastInsertId();
 
-                include('PictureTagDAO.php');
-
+                var_dump($data);
+                $regex = '/tagid=[0-9]+/i';
+                $tags = [];
                 foreach ($data as $key => $value) {
-                    if (strpos($key, 'tag') !== false) {
-                        $pictureTagDAO = new PictureTagDAO;
-                        $result = $pictureTagDAO->store($value, $picture->_id);
+                    if(preg_match ($regex, $key)){
+                        $tags[] = $value;
                     }
                 }
+
+                var_dump($tags);
+                var_dump($picture);
+
+                // MULTIPLE TAGG INPUT AND UPLOAD
+                $pictureTagDAO = new PictureTagDAO;
+                foreach ($tags as $tag) {
+                    $pictureTagDAO->store($tag, $picture->_id);
+                }
+
             } catch (PDOException $e) {
                 echo $e;
                 return false;
             }
         }
-
         header('location: /admin/picture');
     }
 
@@ -254,14 +219,13 @@ class PictureDAO extends Env
             'picture_name' => $data['title'],
             'picture_description' => $data['desc'],
             'picture_link' => $data['link'],
-            'picture_tag' => $data['tag'],
             'picture_sharable' => $data['share'],
         ]);
 
         var_dump($picture);
         if ($picture) {
             try {
-                $statement = $this->connection->prepare("UPDATE {$this->table} SET picture_name = ?, picture_description = ?, picture_link = ?, picture_tag = ?, picture_sharable = ? WHERE picture_id = ?");
+                $statement = $this->connection->prepare("UPDATE {$this->table} SET picture_name = ?, picture_description = ?, picture_link = ?, picture_sharable = ? WHERE picture_id = ?");
                 $statement->execute([
                     $picture->_name,
                     $picture->_description,

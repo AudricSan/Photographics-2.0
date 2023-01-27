@@ -31,6 +31,10 @@ include_once('../model/dao/TagDAO.php');
 include_once('../model/class/Picture.php');
 include_once('../model/dao/PictureDAO.php');
 
+// PictureTag Class & DAO
+include_once('../model/class/PictureTag.php');
+include_once('../model/dao/PictureTagDAO.php');
+
 // Define a global basepath
 define('BASEPATH', '/');
 

@@ -2,9 +2,6 @@
 use photographics\Env;
 use photographics\PictureTag;
 
-$root = $_SERVER['DOCUMENT_ROOT'];
-include_once("$root/model/class/PictureTag.php");
-
 class PictureTagDAO extends Env
 {
     //DON'T TOUCH IT, LITTLE PRICK
@@ -24,7 +21,7 @@ class PictureTagDAO extends Env
         $this->password = parent::env('DB_PASSWORD', '');         //The password to connect to the DB
         $this->host =     parent::env('DB_HOST', 'localhost');    //The name of the server where my DB is located
         $this->dbname =   parent::env('DB_NAME');                 //The name of the DB you want to attack.
-        $this->table =    "picturetag";                                // The table to attack
+        $this->table =    "pt";                                // The table to attack
 
         $this->connection = new PDO("mysql:host={$this->host};dbname={$this->dbname};charset=utf8", $this->username, $this->password, $this->options);
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -51,7 +48,7 @@ class PictureTagDAO extends Env
     public function fetch($id)
     {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM picturetag WHERE pt_tag = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE pt_tag = ?");
             $statement->execute([$id]);
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -69,7 +66,7 @@ class PictureTagDAO extends Env
     public function fetchByPic($id)
     {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM picturetag WHERE pt_picture = ?");
+            $statement = $this->connection->prepare("SELECT * FROM {$this->table} WHERE pt_picture = ?");
             $statement->execute([$id]);
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 

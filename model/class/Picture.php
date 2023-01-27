@@ -6,18 +6,16 @@ class Picture
     private string  $_name;
     private string  $_description;
     private string  $_link;
-    private int     $_tag;
     private int     $_sharable;
 
     //Constructeur
-    public function __construct($id, $name, $desc, $link, $tag, $share)
+    public function __construct($id, $name, $desc, $link, $share)
     {
         $this->_name = $name;
         $this->_description = $desc;
         $this->_link = $link;
         
         $this->_id = intval($id);
-        $this->_tag = intval($tag);
         $this->_sharable = intval($share);
     }
 
