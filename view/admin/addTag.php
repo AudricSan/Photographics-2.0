@@ -14,23 +14,43 @@ if (!isset($_SESSION['logged'])) {
     }
 }
 
-if (isset($id)) {
-    $tagDao = new TagDAO;
-    $tag = $tagDao->fetch($id);
+if (isset($_GET['tag'])) {
+    $tagDAO = new TagDAO;
+    $tag = $tagDAO->fetch($_GET['user']);
+    $link = '/admin/edittag';
+} else {
+    $link = '/admin/addtag';
 }
 ?>
 
 <main class="admin">
-    <h2>Add Tag</h2>
+    <?php
+    if (isset($tag)) {
+        echo "<h2>Edit Tag</h2>";
+    } else {
+        echo "<h2>Add Tag</h2>";
+    }
 
-    <form method='POST' action='' enctype='multipart/form-data' target='_self'>
+    if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+        $error = $_SESSION['error'];
+        echo "
+                <div class='error'>
+                <p> Something Wrong : <span> $error </span></p>
+        ";
+        unset($_SESSION['error']);
+        }
+
+        echo "</div>";
+    ?>
+
+    <form method='POST' action=' <?php echo "$link" ?> ' enctype='multipart/form-data' target='_self'>
         <label for='title'>Tag Title :</label>
-        <input type='text' id='title' name='title' required>
+        <input type='text' id='title' name='title' required value='<?php if (isset($tag)) {echo $tag->_name;} ?>'>
 
         <label for='desc'>Tag Description :</label>
-        <input type='text' id='desc' name='desc' required>
-        <input type='number' name='tag_id' value='$tag->_id' style='display:none'></input><input class='btn validate' type='submit' value='Submit' required>
+        <input type='text' id='desc' name='desc' required value='<?php if (isset($tag)) {echo $tag->_description;} ?>'>
+
+        <input required type='hidden' id='id' name='id' value='<?php if (isset($tag)) {echo $tag->_id;} ?>'>
+        <input class='btn validate' type='submit' value='Submit'>
     </form>
-    </div>
-    </div>
 </main>
