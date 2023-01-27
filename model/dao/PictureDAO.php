@@ -14,7 +14,7 @@ class PictureDAO extends Env
     private $dbname;
     private $table;
     private $connection;
-    
+
     public function __construct()
     {
         // Change the values according to your hosting.
@@ -59,26 +59,28 @@ class PictureDAO extends Env
         }
     }
 
-    public function fetchTags(){
+    public function fetchTags()
+    {
         try {
             $statement = $this->connection->prepare("SELECT picture_tag, COUNT(picture_tag) FROM picture GROUP BY picture_tag");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             return ($result);
-        } catch (PDOException $e)  {
+        } catch (PDOException $e) {
             var_dump($e);
         }
     }
-    
-    public function fetchByTag($id){
+
+    public function fetchByTag($id)
+    {
         try {
             $statement = $this->connection->prepare("SELECT picture_id FROM `picture` WHERE picture_tag = ?");
             $statement->execute([$id]);
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             return ($result);
-        } catch (PDOException $e)  {
+        } catch (PDOException $e) {
             var_dump($e);
         }
     }
@@ -138,47 +140,67 @@ class PictureDAO extends Env
 
         $name = $this->checkInput($data['title']);
         $desc = $this->checkInput($data['desc']);
-
         $share = ($data['share'] === 'on') ? 1 : 0;
+        $imgroot = $_SERVER['SERVER_NAME'] . '/public/images';
 
-        session_start();
-        $imgroot = $_SESSION['rootDoc'] . "/public/images";
+        $error = [];
 
-        $image              = $this->checkInput($_FILES['file']["name"]);
-        $imagePath          = $imgroot . '/img/' . basename($image);
+        $image              = $this->checkInput($_FILES['file']['name']);
+        $imagePath          = SITE_ROOT . '\\images\\img\\' . $image;
         $imageExtension     = pathinfo($imagePath, PATHINFO_EXTENSION);
 
+
+        var_dump($image);
+        var_dump($imagePath);
+        var_dump($imageExtension);
+
         if (empty($image)) {
-
-            $imageError = 'Ce champ ne peut pas être vide';
-
+            $error[] = 'Ce champ ne peut pas être vide';
         } else {
-            $isUploadSuccess = true;
-
             if ($imageExtension != "jpg" && $imageExtension != "png" && $imageExtension != "jpeg") {
-                $imageError = "Les fichiers autorises sont: .jpg, .jpeg, .png";
-                $isUploadSuccess = false;
+                $error[] = "Les fichiers autorises sont: .jpg, .jpeg, .png";
             }
 
             if ($_FILES["file"]["size"] > 500000) {
-                $imageError = "Le fichier ne doit pas depasser les 500KB";
-                $isUploadSuccess = false;
+                $error[] = "Le fichier ne doit pas depasser les 500KB";
             }
 
-            if ($isUploadSuccess) {
-                if (!move_uploaded_file($_FILES["file"]["tmp_name"], $imagePath)) {
-                    $imageError = "Il y a eu une erreur lors de l'upload";
-                    $isUploadSuccess = false;
+            if (empty($error)) {
+                if (file_exists($imagePath)) {
+                    $error[] = "Files Already Exist";
+                } else {
+                    if (!move_uploaded_file($_FILES["file"]["tmp_name"], $imagePath)) {
+                        $error[] = "Il y a eu une erreur lors de l'upload";
+                    }
                 }
             }
         }
 
-        if ($isUploadSuccess != true) {
-            $_SESSION['error']['image']['upload'] = $imageError;
-            header('location: /admin/picture');
-            exit;
+        if (!empty($error)) {
+            $_SESSION['error'] = $error;
+            var_dump($error);
+            // header('location: /admin/newpicture');
+            // die;
         }
-        
+
+        var_dump($data);
+        $regex = '/tagid=[0-9]+/i';
+        $tags = [];
+        foreach ($data as $key => $value) {
+            if(preg_match ($regex, $key)){
+                $tags[] = $value;
+            }
+        }
+
+        var_dump($tags);
+        // MULTIPLE TAGG INPUT AND UPLOAD
+
+
+
+
+
+        die;
+
         $picture = $this->create([
             'picture_id' => 0,
             'picture_name' => $name,

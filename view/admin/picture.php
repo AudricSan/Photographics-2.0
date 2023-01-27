@@ -24,6 +24,19 @@ if (!isset($_SESSION['logged'])) {
         </a>
     </h1>
 
+    <?php
+    if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+        $error = $_SESSION['error'];
+        echo "
+                <div class='error'>
+                <p> Something Wrong : <span> $error </span></p>
+        ";
+        unset($_SESSION['error']);
+        }
+
+        echo "</div>";
+    ?>
+
     <table>
         <thead>
             <tr>
@@ -37,20 +50,33 @@ if (!isset($_SESSION['logged'])) {
             </tr>
         </thead>
 
-        <tbody>
-            <tr>
-                <td> </td>
-                <td> </td>
-                <td> </td>
-                <td> </td>
-                <td> </td>
-                <td> <input type='checkbox' disabled> </td>
-                <td>
-                    <a class='btn edit' href=''>Edit</a>
-                    <a class='btn error' href=''>Delete</a>
-                </td>
-            </tr>
-        </tbody>
+        <?php
+        $pictureDAO = new PictureDAO;
+        $pictures = $pictureDAO->fetchAll();
+
+        var_dump($pictures);
+
+        foreach ($pictures as $picture) {
+            echo "
+                <tbody>
+                    <tr>
+                        <td> $picture->_id </td>
+                        <td> <img src='../img/$picture->_link' > </td>
+                        <td> $picture->_name </td>
+                        <td> $picture->_description </td>
+                        <td> $picture->_link </td>
+                        <td> $picture->_tag </td>
+                        <td> $picture->_sharable </td>
+
+                        <td class=action>
+                            <a class='btn edit'   href='/admin/newtag?tag=$picture->_id'>Edit</a>
+                            <a class='btn delete' href='/admin/deltag?tag=$picture->_id'>Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            ";
+        }
+        ?>
     </table>
     </div>
 </main>

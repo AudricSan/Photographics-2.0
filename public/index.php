@@ -8,6 +8,9 @@ use photographics\Route;
 // Session
 session_start();
 
+// HUM
+define ('SITE_ROOT', realpath(dirname(__FILE__)));
+
 // Include class
 include '../model/class/Route.php';
 include '../model/class/env.php';
@@ -23,6 +26,10 @@ include_once('../model/dao/RoleDAO.php');
 // Tag Class & DAO
 include_once('../model/class/Tag.php');
 include_once('../model/dao/TagDAO.php');
+
+// Picture Class & DAO
+include_once('../model/class/Picture.php');
+include_once('../model/dao/PictureDAO.php');
 
 // Define a global basepath
 define('BASEPATH', '/');
@@ -181,6 +188,23 @@ Route::add('/admin/deltag', function () {
   var_dump($_GET);
   $tagDAO = new TagDAO;
   $tagDAO->delete($_GET['tag']);
+}, 'get');
+
+// Picture edition Route
+Route::add('/admin/addpic', function () {
+  $pictureDAO = new PictureDAO;
+  $pictureDAO->store($_POST);
+}, 'post');
+
+Route::add('/admin/editpic', function () {
+  $pictureDAO = new PictureDAO;
+  $pictureDAO->update($_POST['id'], $_POST);
+}, 'post');
+
+Route::add('/admin/delpic', function () {
+  var_dump($_GET);
+  $pictureDAO = new PictureDAO;
+  $pictureDAO->delete($_GET['tag']);
 }, 'get');
 
 
