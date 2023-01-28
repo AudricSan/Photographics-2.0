@@ -125,7 +125,7 @@ Route::add('/admin/picture', function () {
   foot();
 });
 
-Route::add('/admin/newpicture', function () {
+Route::add('/admin/newpic', function () {
   head();
   include_once('../view/admin/addPicture.php');
   foot();
@@ -208,7 +208,7 @@ Route::add('/admin/editpic', function () {
 Route::add('/admin/delpic', function () {
   var_dump($_GET);
   $pictureDAO = new PictureDAO;
-  $pictureDAO->delete($_GET['tag']);
+  $pictureDAO->delete($_GET['pic']);
 }, 'get');
 
 
