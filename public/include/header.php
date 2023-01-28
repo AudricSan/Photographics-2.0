@@ -22,8 +22,6 @@
     <meta name='msapplication-TileColor' content='#ffffff'>
     <meta name='theme-color' content='#ffffff'>
 
-    <link rel='stylesheet' type='text/css' href='../css/header.css' />
-    <link rel='stylesheet' type='text/css' href='../css/footer.css' />
     <link rel='stylesheet' type='text/css' href='../css/index.css' />
     <link rel='stylesheet' type='text/css' href='../css/error.css' />
 
@@ -48,7 +46,7 @@
             foreach ($tags as $tag) {
                 $nb = $ptDAO->CountByTag($tag->_id);
                 $nb = $nb[0]['n'];
-                
+
                 if ($nb > 5) {
                     echo "<li> <a href='/'>$tag->_name</a> </li>";
                 }
