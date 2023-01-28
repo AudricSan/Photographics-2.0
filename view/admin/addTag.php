@@ -16,7 +16,7 @@ if (!isset($_SESSION['logged'])) {
 
 if (isset($_GET['tag'])) {
     $tagDAO = new TagDAO;
-    $tag = $tagDAO->fetch($_GET['user']);
+    $tag = $tagDAO->fetch($_GET['tag']);
     $link = '/admin/edittag';
 } else {
     $link = '/admin/addtag';
