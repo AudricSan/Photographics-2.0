@@ -170,7 +170,7 @@ class PictureDAO extends Env
         if ($picture) {
             try {
                 $statement = $this->connection->prepare("INSERT INTO {$this->table} (
-                picture_name, picture_description, picture_link, picture_sharable) VALUES (?, ?, ?, ?, ?)");
+                picture_name, picture_description, picture_link, picture_sharable) VALUES (?, ?, ?, ?)");
                 $statement->execute([
                     $picture->_name,
                     $picture->_description,
