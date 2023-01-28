@@ -32,7 +32,7 @@ foreach ($pictures as $picture) {
     echo "
         <div class='media'>
             <a href='/see/$picture->_id'>
-                <img src='/public/images/img/$picture->_link'></a>
+                <img src='../images/img/$picture->_link'></a>
             <div>
                 <a><i class='fa-solid fa-heart'></i></a>
                 <a><i class='fa-solid fa-share-nodes'></i></a>
