@@ -66,7 +66,7 @@ if (!isset($_SESSION['logged'])) {
                 <tbody>
                     <tr>
                         <td> $picture->_id </td>
-                        <td> <img src='../img/$picture->_link' > </td>
+                        <td> <img src='../images/img/$picture->_link' > </td>
                         <td> $picture->_name </td>
                         <td> $picture->_description </td>
                         <td> $picture->_link </td>
