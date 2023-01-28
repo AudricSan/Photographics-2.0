@@ -16,6 +16,9 @@ if (!empty($_GET['id'])) {
     $subtitle = 'Some of my Work';
 }
 
+$pictureDAO = new PictureDAO;
+$pictures = $pictureDAO->fetchAll();
+
 echo "
     <div class='card'>
         <h2> $title</h2>
@@ -23,49 +26,22 @@ echo "
     </div>
 
     <div class='gallery'>
-        <div class='media'>
-            <a href='/01'>
-                <img src='/public/images/img/002.png'></a>
+";
 
+foreach ($pictures as $picture) {
+    echo "
+        <div class='media'>
+            <a href='/see/$picture->_id'>
+                <img src='/public/images/img/$picture->_link'></a>
             <div>
                 <a><i class='fa-solid fa-heart'></i></a>
                 <a><i class='fa-solid fa-share-nodes'></i></a>
             </div>
         </div>
+    ";
+}
 
-        <div class='media'>
-            <a href=''>
-                <img src=' ../public/images/img/001.jpg'></a>
-            <div>
-                <a><i class='fa-solid fa-heart'></i></a>
-                <a><i class='fa-solid fa-share-nodes'></i></a>
-            </div>
-        </div>
+echo "
     </div>
 </main>
 ";
-
-// <main>
-    
-
-//     <div class='gallery'>
-//         <div class='media'>
-//             <a href='/01'>
-//                 <img src='/public/images/img/002.png'></a>
-
-//             <div>
-//                 <a><i class='fa-solid fa-heart'></i></a>
-//                 <a><i class='fa-solid fa-share-nodes'></i></a>
-//             </div>
-//         </div>
-
-//         <div class='media'>
-//             <a href=''>
-//                 <img src=' ../public/images/img/001.jpg'></a>
-//             <div>
-//                 <a><i class='fa-solid fa-heart'></i></a>
-//                 <a><i class='fa-solid fa-share-nodes'></i></a>
-//             </div>
-//         </div>
-//     </div>
-// </main>
