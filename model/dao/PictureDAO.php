@@ -2,6 +2,7 @@
 
 use photographics\Picture;
 use photographics\Env;
+use photographics\OptimizerFactory;
 
 class PictureDAO extends Env
 {
@@ -97,12 +98,13 @@ class PictureDAO extends Env
                 var_dump($e->getMessage());
             }
         } else {
-            echo 'Could not delete ' . $oldpicture . ', file does not exist';
+            $_SESSION['error'] = 'Could not delete ' . $oldpicture . ', file does not exist';
+            header('location: /admin/picture');
+            die;
         }
 
-        //PHP Header Brocken for any reason => use Js redirect tu patch//
-        // header('location: /admin/picture');
-        echo "<script language='Javascript'>document.location.replace('/admin/picture');</script>";
+        header('location: /admin/picture');
+        die;
     }
 
     public function store($data)
@@ -113,7 +115,7 @@ class PictureDAO extends Env
 
         $name = $this->checkInput($data['title']);
         $desc = $this->checkInput($data['desc']);
-        $share = ($data['share'] === 'on') ? 1 : 0;
+        if (isset($data['share'])) { $share = ($data['share'] === 'on') ? 1 : 0; }else{ $share = 0; }
         $imgroot = $_SERVER['SERVER_NAME'] . '/public/images';
 
         $error = [];
@@ -121,11 +123,6 @@ class PictureDAO extends Env
         $image              = $this->checkInput($_FILES['file']['name']);
         $imagePath          = SITE_ROOT . '\\images\\img\\' . $image;
         $imageExtension     = pathinfo($imagePath, PATHINFO_EXTENSION);
-
-
-        var_dump($image);
-        var_dump($imagePath);
-        var_dump($imageExtension);
 
         if (empty($image)) {
             $error[] = 'Ce champ ne peut pas être vide';
@@ -152,8 +149,8 @@ class PictureDAO extends Env
         if (!empty($error)) {
             $_SESSION['error'] = $error;
             var_dump($error);
-            // header('location: /admin/newpicture');
-            // die;
+            header('location: /admin/newpic');
+            die;
         }
 
         $nb = count($this->fetchAll());
