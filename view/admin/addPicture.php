@@ -59,11 +59,22 @@ $tags = $tagDao->fetchAll();
             <p>Select Tags : </p>
             <div>
                 <?php
+                $ptDAO = new PictureTagDAO;
+                $pts = $ptDAO->fetchAll();
+
                 foreach ($tags as $tag) {
                     echo "
                             <label for='$tag->_id'>$tag->_name</label>
-                            <input type='checkbox' id='$tag->_id' name='tagid=$tag->_id' value='$tag->_id'>
-                        ";
+                            <input type='checkbox' id='$tag->_id' name='tagid=$tag->_id' value='$tag->_id'";
+
+                            foreach ($pts as $pt) {
+                                if ($pt->_pic === $pictures->_id) {
+                                    if ($pt->_tag === $tag->_id) {
+                                        echo "checked";
+                                    }
+                                }
+                            } 
+                            echo" >";
                 }
                 ?>
             </div>
@@ -74,18 +85,17 @@ $tags = $tagDao->fetchAll();
 
 
         <label for='file'>File:</label>
-        <input type='file' id='file' name='file' required>
-
         <?php
         if (isset($pictures)) {
             $img = $pictures->_link;
             echo "<div> <img src='$img'> </div>";
+        }else{
+            echo "<input type='file' id='file' name='file' required>";
         }
         ?>
 
-        <input type='number' name='picture_id' value='$picture->_id' style='display:none'></input>
-        <input type='text' name='link' value='$picture->_link' style='display:none'></input>
-
+        <input required type='hidden' id='id'   name='id'   value='<?php if (isset($pictures)) {echo $pictures->_id;} ?>'>
+        <input required type='hidden' id='link' name='link' value='<?php if (isset($pictures)) {echo $pictures->_link;} ?>'>
         <input class='btn validate' type='submit' value='Submit' required>
     </form>
 </main>
