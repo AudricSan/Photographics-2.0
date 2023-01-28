@@ -19,7 +19,7 @@ if (!isset($_SESSION['logged'])) {
 
 <main class="admin">
     <h1>
-        <a href='/admin/newpicture'>
+        <a href='/admin/newpic'>
             <i class="fa-solid fa-image"></i>
         </a>
     </h1>
@@ -87,8 +87,8 @@ if (!isset($_SESSION['logged'])) {
                         <td> $picture->_sharable </td>
 
                         <td class=action>
-                            <a class='btn edit'   href='/admin/newtag?tag=$picture->_id'>Edit</a>
-                            <a class='btn delete' href='/admin/deltag?tag=$picture->_id'>Delete</a>
+                            <a class='btn edit'   href='/admin/newpic?pic=$picture->_id'>Edit</a>
+                            <a class='btn delete' href='/admin/delpic?pic=$picture->_id'>Delete</a>
                         </td>
                     </tr>
                 </tbody>
