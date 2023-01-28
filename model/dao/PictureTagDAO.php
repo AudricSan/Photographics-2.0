@@ -108,6 +108,21 @@ class PictureTagDAO extends Env
             var_dump($e->getMessage());
         }
     }
+    
+    public function deleteByPic($id)
+    {
+        if (!$id) {
+            return false;
+        }
+        try {
+            $statement = $this->connection->prepare("DELETE FROM {$this->table} WHERE pt_picture = ?");
+            $statement->execute([
+                $id
+            ]);
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
+        }
+    }
 
     public function store($tagid, $picid)
     {
