@@ -39,6 +39,21 @@
         <a href='/'><img src='../images/logo.svg' alt='Logo' title='Photographics Logo'></a>
 
         <ul>
+            <li> <a href='/'>Gallery</a> </li>
+            <?php
+            $tagDAO = new TagDAO;
+            $ptDAO = new PictureTagDAO;
+            $tags = $tagDAO->fetchAll();
+
+            foreach ($tags as $tag) {
+                $nb = $ptDAO->CountByTag($tag->_id);
+                $nb = $nb[0]['n'];
+                
+                if ($nb > 5) {
+                    echo "<li> <a href='/'>$tag->_name</a> </li>";
+                }
+            }
+            ?>
             <li> <a href='/about'>About</a> </li>
             <li> <a href='/contact'>Contact</a> </li>
         </ul>
