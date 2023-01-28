@@ -1,5 +1,7 @@
 <?php
 
+use photographics\Picture;
+
 if (!isset($_SESSION['logged'])) {
     header("location: /admin/login");
     die;
@@ -64,17 +66,19 @@ $tags = $tagDao->fetchAll();
 
                 foreach ($tags as $tag) {
                     echo "
-                            <label for='$tag->_id'>$tag->_name</label>
-                            <input type='checkbox' id='$tag->_id' name='tagid=$tag->_id' value='$tag->_id'";
+                        <label for='$tag->_id'>$tag->_name</label>
+                        <input type='checkbox' id='$tag->_id' name='tagid=$tag->_id' value='$tag->_id'";
 
+                        if (isset($pictures)) {
                             foreach ($pts as $pt) {
                                 if ($pt->_pic === $pictures->_id) {
                                     if ($pt->_tag === $tag->_id) {
                                         echo "checked";
                                     }
                                 }
-                            } 
-                            echo" >";
+                            }
+                        }
+                    echo" >";
                 }
                 ?>
             </div>
