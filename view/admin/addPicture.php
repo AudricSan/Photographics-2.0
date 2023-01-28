@@ -44,7 +44,7 @@ $tags = $tagDao->fetchAll();
                 <p> Something Wrong : <span> $error </span></p>
             ";
         }
-        // unset($_SESSION['error']);
+        unset($_SESSION['error']);
     }
 
     echo "</div>";
@@ -92,7 +92,7 @@ $tags = $tagDao->fetchAll();
         <?php
         if (isset($pictures)) {
             $img = $pictures->_link;
-            echo "<div> <img src='$img'> </div>";
+            echo "<div> <img src='../images/img/$img'> </div>";
         }else{
             echo "<input type='file' id='file' name='file' required>";
         }
