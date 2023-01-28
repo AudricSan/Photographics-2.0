@@ -184,7 +184,7 @@ class PictureDAO extends Env
                 $regex = '/tagid=[0-9]+/i';
                 $tags = [];
                 foreach ($data as $key => $value) {
-                    if(preg_match ($regex, $key)){
+                    if (preg_match($regex, $key)) {
                         $tags[] = $value;
                     }
                 }
@@ -197,7 +197,6 @@ class PictureDAO extends Env
                 foreach ($tags as $tag) {
                     $pictureTagDAO->store($tag, $picture->_id);
                 }
-
             } catch (PDOException $e) {
                 echo $e;
                 return false;
@@ -211,8 +210,8 @@ class PictureDAO extends Env
         if (empty($data)) {
             return false;
         }
-        var_dump($data);
-        $data['share'] = (isset($data['share'])) ? 1 : 0;
+
+        $data['share'] = ($data['share'] === 'on') ? 1 : 0;
 
         $picture = $this->create([
             "picture_id" => $id,
@@ -222,7 +221,6 @@ class PictureDAO extends Env
             'picture_sharable' => $data['share'],
         ]);
 
-        var_dump($picture);
         if ($picture) {
             try {
                 $statement = $this->connection->prepare("UPDATE {$this->table} SET picture_name = ?, picture_description = ?, picture_link = ?, picture_sharable = ? WHERE picture_id = ?");
@@ -230,47 +228,36 @@ class PictureDAO extends Env
                     $picture->_name,
                     $picture->_description,
                     $picture->_link,
-                    $picture->_tag,
                     $picture->_sharable,
                     $picture->_id
                 ]);
 
-                //PICTURE CAN HAVE MULTIPLE TAGS => BUGS
-                // include('PictureTagDAO.php');
-                // // var_dump($picture);
+                $ptDAO = new PictureTagDAO;
+                $pts = $ptDAO->fetchByPic($picture->_id);
 
-                // //FIXME CANT EDIT TAGS ATRIBUTE TO AN IMAGE
-                // $pictureTagDAO = new PictureTagDAO;
-                // $pictureByTag = $pictureTagDAO->fetchByPic($picture->_id);
-                // $pictureTag = $pictureTagDAO->fetchAll();
+                foreach ($pts as $pt) {
+                    if ($pt->_pic === $picture->_id) {
+                        $ptDAO->deleteByPic($picture->_id);
+                    }
+                }
 
-                // $tags = array();
-                // foreach ($data as $key => $value) {
-                //     if (strpos($key, 'tag') !== false) {
-                //         array_push($tags, $value);
-                //     }
-                // }
+                $regex = '/tagid=[0-9]+/i';
+                $tags = [];
+                foreach ($data as $key => $value) {
+                    if (preg_match($regex, $key)) {
+                        $tags[] = $value;
+                    }
+                }
 
-                // if (!empty($pictureByTag)) {
-                //     foreach ($pictureByTag as $key => $value) {
-                //         if ($value->_pic === $picture->_id) {
-                //             if (!in_array($value->_tag, $tags)) {
-                //                 $pictureTagDAO->store($value, $picture->_id);
-                //             }
-                //         }
-                //     }
-                // } else {
-                //     foreach ($tags as $key => $value) {
-                //         $pictureTagDAO->store($value, $picture->_id);
-                //     }
-                // }
-                //END
+                foreach ($tags as $tag) {
+                    $ptDAO->store($tag, $picture->_id);
+                }
+                
             } catch (PDOException $e) {
                 var_dump($e->getMessage());
                 return false;
             }
         }
-
         header('location: /admin/picture');
     }
 }
