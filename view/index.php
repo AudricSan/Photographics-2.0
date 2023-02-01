@@ -6,18 +6,27 @@ if (isset($_SESSION['logged'])) {
     echo "<main>";
 }
 
-if (!empty($_GET['id'])) {
+$pictureDAO = new PictureDAO;
+
+if (isset($tagID)) {
     $tagDao = new TagDAO;
-    $tag = $tagDao->fetch($_GET['id']);
+    $tag = $tagDao->fetch($tagID);
+    
+    if ($tag === false) {
+        header('location: /');
+        die;
+    }
+
     $title = $tag->_name;
-    $subtitle = "Some of my $tag->_name";
-} else {
+    $subtitle = "Some of my $tag->_name Work";
+    $pictures = $pictureDAO->fetchByTag($tag->_id);
+
+} else {   
     $title = 'Gallery';
     $subtitle = 'Some of my Work';
-}
+    $pictures = $pictureDAO->fetchAll();
 
-$pictureDAO = new PictureDAO;
-$pictures = $pictureDAO->fetchAll();
+}
 
 echo "
     <div class='card'>
