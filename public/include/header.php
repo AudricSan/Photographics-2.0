@@ -48,7 +48,7 @@
                 $nb = $nb[0]['n'];
 
                 if ($nb > 5) {
-                    echo "<li> <a href='/'>$tag->_name</a> </li>";
+                    echo "<li> <a href='/tag/$tag->_id'>$tag->_name</a> </li>";
                 }
             }
             ?>
