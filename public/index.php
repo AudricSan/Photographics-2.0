@@ -9,7 +9,7 @@ use photographics\Route;
 session_start();
 
 // HUM
-define ('SITE_ROOT', realpath(dirname(__FILE__)));
+define('SITE_ROOT', realpath(dirname(__FILE__)));
 
 // Include class
 include '../model/class/Route.php';
@@ -49,27 +49,38 @@ function foot()
   include_once('include/footer.php');
 }
 
-function gallery($how)
+function IsConnected()
 {
-  $_GET['id'] = $how;
-  include_once('../view/index.php');
-}
+  if (!isset($_SESSION['logged'])) {
+    return false;
+  } else {
+    $adminDAO = new AdminDAO;
+    $adminConnected = $adminDAO->fetch($_SESSION['logged']);
 
-function adnav()
-{
-  include_once('include/adnav.php');
+    if (!$adminConnected) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
 
 // Base Route
 Route::add('/', function () {
   head();
-  gallery(false);
+  include_once('../view/index.php');
   foot();
 });
 
-Route::add('/([0-9]*)', function ($id) {
+Route::add('/see/([0-9]*)', function ($id) {
   head();
   include_once('../view/see.php');
+  foot();
+});
+
+Route::add('/tag/([0-9]*)', function ($tagID) {
+  head();
+  include_once('../view/index.php');
   foot();
 });
 
@@ -94,6 +105,7 @@ Route::add('/contact', function () {
 
 // Admin page route
 Route::add('/admin', function () {
+
   head();
   include_once('../view/admin/index.php');
   foot();
@@ -107,12 +119,14 @@ Route::add('/admin/login', function () {
 
 //// User
 Route::add('/admin/user', function () {
+
   head();
   include_once('../view/admin/user.php');
   foot();
 });
 
 Route::add('/admin/newuser', function () {
+
   head();
   include_once('../view/admin/addUser.php');
   foot();
@@ -120,12 +134,14 @@ Route::add('/admin/newuser', function () {
 
 //// Picture
 Route::add('/admin/picture', function () {
+
   head();
   include_once('../view/admin/picture.php');
   foot();
 });
 
 Route::add('/admin/newpic', function () {
+
   head();
   include_once('../view/admin/addPicture.php');
   foot();
@@ -145,70 +161,111 @@ Route::add('/admin/newtag', function () {
 });
 
 Route::add('/admin/doc', function () {
-  head();
-  include_once('../view/admin/doc.php');
-  foot();
+  if (IsConnected()) {
+    head();
+    include_once('../view/admin/doc.php');
+    foot();
+  } else {
+    header('location: /');
+  }
 });
 
 Route::add('/admin/disconnect', function () {
-  $adminDAO = new AdminDAO;
-  $adminDAO->disconnect();
+  if (IsConnected()) {
+    $adminDAO = new AdminDAO;
+    $adminDAO->disconnect();
+  } else {
+    header('location: /');
+  }
 });
 
 // Admin edition Route
 Route::add('/admin/log', function () {
-  $adminDAO = new AdminDAO;
-  $adminDAO->login($_POST);
+    $adminDAO = new AdminDAO;
+    $adminDAO->login($_POST);
 }, 'post');
 
 Route::add('/admin/adduser', function () {
-  $adminDAO = new AdminDAO;
-  $adminDAO->store($_POST);
+  if (IsConnected()) {
+    $adminDAO = new AdminDAO;
+    $adminDAO->store($_POST);
+  } else {
+    header('location: /');
+  }
 }, 'post');
 
 Route::add('/admin/edituser', function () {
-  $adminDAO = new AdminDAO;
-  $adminDAO->update($_POST['id'], $_POST);
+  if (IsConnected()) {
+    $adminDAO = new AdminDAO;
+    $adminDAO->update($_POST['id'], $_POST);
+  } else {
+    header('location: /');
+  }
 }, 'post');
 
 Route::add('/admin/deluser', function () {
-  var_dump($_GET);
-  $adminDAO = new AdminDAO;
-  $adminDAO->delete($_GET['user']);
+  if (IsConnected()) {
+    $adminDAO = new AdminDAO;
+    $adminDAO->delete($_GET['user']);
+  } else {
+    header('location: /');
+  }
 }, 'get');
 
 // Tag edition Route
 Route::add('/admin/addtag', function () {
-  $tagDAO = new TagDAO;
-  $tagDAO->store($_POST);
+  if (IsConnected()) {
+    $tagDAO = new TagDAO;
+    $tagDAO->store($_POST);
+  } else {
+    header('location: /');
+  }
 }, 'post');
 
 Route::add('/admin/edittag', function () {
-  $tagDAO = new TagDAO;
-  $tagDAO->update($_POST['id'], $_POST);
+  if (IsConnected()) {
+    $tagDAO = new TagDAO;
+    $tagDAO->update($_POST['id'], $_POST);
+  } else {
+    header('location: /');
+  }
 }, 'post');
 
 Route::add('/admin/deltag', function () {
-  var_dump($_GET);
-  $tagDAO = new TagDAO;
-  $tagDAO->delete($_GET['tag']);
+  if (IsConnected()) {
+    $tagDAO = new TagDAO;
+    $tagDAO->delete($_GET['tag']);
+  } else {
+    header('location: /');
+  }
 }, 'get');
 
 // Picture edition Route
 Route::add('/admin/addpic', function () {
-  $pictureDAO = new PictureDAO;
-  $pictureDAO->store($_POST);
+  if (IsConnected()) {
+    $pictureDAO = new PictureDAO;
+    $pictureDAO->store($_POST);
+  } else {
+    header('location: /');
+  }
 }, 'post');
 
 Route::add('/admin/editpic', function () {
-  $pictureDAO = new PictureDAO;
-  $pictureDAO->update($_POST['id'], $_POST);
+  if (IsConnected()) {
+    $pictureDAO = new PictureDAO;
+    $pictureDAO->update($_POST['id'], $_POST);
+  } else {
+    header('location: /');
+  }
 }, 'post');
 
 Route::add('/admin/delpic', function () {
-  var_dump($_GET);
-  $pictureDAO = new PictureDAO;
-  $pictureDAO->delete($_GET['pic']);
+  if (IsConnected()) {
+    $pictureDAO = new PictureDAO;
+    $pictureDAO->delete($_GET['pic']);
+  } else {
+    header('location: /');
+  }
 }, 'get');
 
 
