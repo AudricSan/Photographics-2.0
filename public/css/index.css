@@ -157,6 +157,7 @@ main .gallery {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  gap: 1.5em;
 }
 main .gallery .media div {
   position: relative;
