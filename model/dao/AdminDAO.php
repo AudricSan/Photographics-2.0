@@ -117,7 +117,7 @@ class AdminDAO extends Env
 
     public function store($data)
     {
-        var_dump($data);
+        // var_dump($data);
 
         if (empty($data)) {
             $error[] = "No data Set";
